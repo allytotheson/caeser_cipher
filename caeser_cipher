@@ -1,0 +1,16 @@
+def encrypt(word,key):
+  encryptedWord = ""
+  for i in word:
+    if i == " ":
+      encryptedWord += i
+    else:
+      c = ord(i) + key
+      if i.isupper()==True and c>90:
+        c = 64 + (c%90)
+      if i.islower()==True and c>122:
+        c = 96+(c%122)
+      encryptedWord += chr(c)
+
+  print(encryptedWord)
+
+encrypt(input("Plaintext : "), int(input("Key : ")))
