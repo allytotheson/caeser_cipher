@@ -1,0 +1,33 @@
+def check_special(x):
+  if ord(x) not in range(65,91) and ord(x) not in range(97,123):
+    return True
+
+def encrypt(i,key):
+  key = ord(key.upper())-65
+  if check_special(i)==True:
+    c = i
+    return c
+  else:
+    c = ord(i) + key
+    if i.isupper()==True and c>90:
+      c = 64 + (c%90)
+    if i.islower()==True and c>122:
+      c = 96+(c%122)
+    return chr(c)
+
+
+def vignere(keyword,plaintext):
+  keyword = keyword*(len(plaintext)//len(keyword)) + keyword[:len(plaintext)%len(keyword)]
+  encryptedMessage = ""
+  for i in range(len(plaintext)):
+    encryptedMessage += encrypt(plaintext[i],keyword[i])
+  print(encryptedMessage)
+
+keyword = input("Keyword : ")
+plaintext = input("Plaintext : ")
+
+for i in keyword:
+  if i.isnumeric()==True:
+    keyword = input("Please enter keyword with no numbers : ")
+
+vignere(keyword,plaintext)
